@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Service;
+using Services;
 
 namespace Controller
 {
@@ -16,14 +16,15 @@ namespace Controller
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var patient = _service.GetAllAsync();
+            var patient = await _service.GetAllAsync();
             return Ok(patient);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute]int id)
         {
-            var patient = _service.GetByIdAsync(id);
+            Console.WriteLine($"id: {id}");
+            var patient = await _service.GetByIdAsync(id);
             return Ok(patient);
         }
     }

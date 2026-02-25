@@ -1,6 +1,6 @@
 using Models;
 
-namespace Service
+namespace Services
 {
     public interface IPatientService
     {

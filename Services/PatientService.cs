@@ -1,23 +1,24 @@
 using Models;
+using Repository;
 
-namespace Service
+namespace Services
 {
     public class PatientService : IPatientService
     {
-        public readonly IPatientService _service;
-        public PatientService(IPatientService service)
+        public readonly IPatientRepository _repo;
+        public PatientService(IPatientRepository repo)
         {
-            _service = service;
+            _repo = repo;
         }
 
         public async Task<List<Patient>> GetAllAsync()
         {
-            return await _service.GetAllAsync();
+            return await _repo.GetAllPatientAsync();
         }
 
         public async Task<Patient> GetByIdAsync(int id)
         {
-            return await _service.GetByIdAsync(id);
+            return await _repo.GetPatientByIdAsync(id);
         }
     }
 }

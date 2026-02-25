@@ -1,49 +1,38 @@
+using Controller;
 using dotenv.net;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Repository;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //connetion db
+var con = builder.Configuration["db:conn"];
+Console.WriteLine("abc");
+Console.WriteLine(con);
 builder.Services.AddDbContext<AppDbContext>(opt =>
-opt.UseSqlServer(builder.Configuration["ConnectionString"]));
-Console.WriteLine("connection db sukses ");
+opt.UseSqlServer(con));
+// controller
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =>
+    {
+        opt.JsonSerializerOptions.PropertyNamingPolicy = 
+            System.Text.Json.JsonNamingPolicy.SnakeCaseLower;
+    });
+
+builder.Services.AddScoped<IPatientService, PatientService>();
+//repo
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+//service
+builder.Services.AddEndpointsApiExplorer();
+//controller
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
