@@ -25,7 +25,7 @@ namespace Controller
         {
             Console.WriteLine($"id: {id}");
             var patient = await _service.GetByIdAsync(id);
-            return Ok(patient);
+            return Ok(new { data = patient });
         }
     }
 }

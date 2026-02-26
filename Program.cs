@@ -21,10 +21,14 @@ builder.Services.AddControllers()
             System.Text.Json.JsonNamingPolicy.SnakeCaseLower;
     });
 
+//DI
+//service
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
 //repo
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-//service
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
 builder.Services.AddEndpointsApiExplorer();
 //controller
 // Add services to the container.

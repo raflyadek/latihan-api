@@ -1,5 +1,6 @@
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
 namespace Repository
@@ -11,10 +12,10 @@ namespace Repository
         {
             _context = context;
         }
-        //limit get all 
+        //TODO: limit get all 
         public async Task<List<Patient>> GetAllPatientAsync()
         {
-            return await _context.Patient.ToListAsync();
+            return await _context.Patient.OrderBy(p => p.PID).ToListAsync();
         }
 
         public async Task<Patient?> GetPatientByIdAsync(long id)
