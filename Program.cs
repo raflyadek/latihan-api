@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 //connetion db
 var con = builder.Configuration["db:conn"];
-Console.WriteLine("abc");
-Console.WriteLine(con);
+// Console.WriteLine("abc");
+// Console.WriteLine(con);
 builder.Services.AddDbContext<AppDbContext>(opt =>
 opt.UseSqlServer(con));
 // controller
@@ -29,10 +29,13 @@ builder.Services.AddEndpointsApiExplorer();
 //controller
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 app.MapControllers();
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.Run();
 
+// Server=10.1.251.88;Database=originTest;User Id=it_mhg;Password=MandayaMhg123;TrustServerCertificate=True;

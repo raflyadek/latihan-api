@@ -6,7 +6,7 @@ namespace Repository
     {
         // get all  
         Task<List<Patient>> GetAllPatientAsync();
-        Task<Patient?> GetPatientByIdAsync(int id);
+        Task<Patient?> GetPatientByIdAsync(long id);
         // Task CreatePatient();
         // Task DeletePatient(int id);
         // Task UpdatePatient(Patient patient);

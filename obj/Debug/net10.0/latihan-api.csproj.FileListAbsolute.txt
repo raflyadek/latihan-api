@@ -160,3 +160,6 @@
 /Users/raflyadek/mandaya/latihan-api/obj/Debug/net10.0/latihan-api.pdb
 /Users/raflyadek/mandaya/latihan-api/obj/Debug/net10.0/latihan-api.genruntimeconfig.cache
 /Users/raflyadek/mandaya/latihan-api/obj/Debug/net10.0/ref/latihan-api.dll
+/Users/raflyadek/mandaya/latihan-api/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/raflyadek/mandaya/latihan-api/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/raflyadek/mandaya/latihan-api/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll

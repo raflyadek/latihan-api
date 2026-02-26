@@ -11,13 +11,13 @@ namespace Repository
         {
             _context = context;
         }
-
+        //limit get all 
         public async Task<List<Patient>> GetAllPatientAsync()
         {
             return await _context.Patient.ToListAsync();
         }
 
-        public async Task<Patient?> GetPatientByIdAsync(int id)
+        public async Task<Patient?> GetPatientByIdAsync(long id)
         {
             return await _context.Patient.FindAsync(id);
         }

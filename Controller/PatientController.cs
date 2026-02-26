@@ -21,7 +21,7 @@ namespace Controller
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute]int id)
+        public async Task<IActionResult> GetById([FromRoute]long id)
         {
             Console.WriteLine($"id: {id}");
             var patient = await _service.GetByIdAsync(id);

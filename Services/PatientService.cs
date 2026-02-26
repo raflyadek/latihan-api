@@ -16,7 +16,7 @@ namespace Services
             return await _repo.GetAllPatientAsync();
         }
 
-        public async Task<Patient> GetByIdAsync(int id)
+        public async Task<Patient> GetByIdAsync(long id)
         {
             return await _repo.GetPatientByIdAsync(id);
         }
