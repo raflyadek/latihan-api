@@ -1,8 +1,8 @@
-namespace Models
+namespace dto
 {
-    public class Patient
+    public class PatientUpdateRequest
     {
-        public long PID { get; set; }
+        public long? PID { get; set; }
         public string? PNAME { get; set; }
         public string? PEMAIL { get; set; }
         public string? PRN { get; set; }

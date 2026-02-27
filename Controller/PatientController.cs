@@ -36,5 +36,20 @@ namespace Controller
             var patient = await _service.GetPatientByFilterAsync(filter);
             return Ok(new { data = patient});
         }
+
+        [HttpPatch("{id:long}")]
+        public async Task<IActionResult> UpdatePatient( 
+            [FromBody] PatientUpdateRequest request,
+            long id
+        )
+        {
+            var updatedPatient = await _service.UpdatePatientAsync(id, request);
+            if (updatedPatient == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new {data = updatedPatient});
+        }
     }
 }

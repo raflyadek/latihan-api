@@ -26,5 +26,9 @@ namespace Services
         {
             return await _repo.GetPatientFilterAsync(filter);
         }
+        public async Task<Patient?> UpdatePatientAsync(long id, PatientUpdateRequest request)
+        {
+            return await _repo.UpdatePatientAsync(id, request);
+        }
     }
 }

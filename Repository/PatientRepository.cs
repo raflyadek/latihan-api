@@ -1,5 +1,6 @@
 using dto;
 using Infrastructure;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.IdentityModel.Tokens;
@@ -47,6 +48,38 @@ namespace Repository
                 query = query.Where(p => p.PRN.Contains(filter.PRN));
             }
             return await query.ToListAsync();
+        }
+
+        public async Task<Patient?> UpdatePatientAsync(long id, PatientUpdateRequest request)
+        {
+            var patient = await _context.Patient.FindAsync(id);
+            if (patient == null)
+            {
+                return null;
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.PNAME))
+            {
+                patient.PNAME = request.PNAME;
+            }
+            if (request.PDOB.HasValue)
+            {
+                patient.PDOB = request.PDOB;
+            }
+            if (!string.IsNullOrWhiteSpace(request.PEMAIL))
+            {
+                patient.PEMAIL = request.PEMAIL;
+            }
+            if (request.PFOREIGN.HasValue)
+            {
+                patient.PFOREIGN = request.PFOREIGN;
+            }
+            if (!string.IsNullOrWhiteSpace(request.PRN))
+            {
+                patient.PRN = request.PRN;
+            }
+            await _context.SaveChangesAsync();
+            return patient;
         }
     }
 }
