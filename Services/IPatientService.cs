@@ -1,3 +1,4 @@
+using dto;
 using Models;
 
 namespace Services
@@ -6,6 +7,6 @@ namespace Services
     {
         Task<List<Patient>> GetAllAsync();
         Task<Patient?> GetByIdAsync(long id);
-        Task<Patient?> GetByNameAsync(string name);
+        Task<IEnumerable<Patient?>> GetPatientByFilterAsync(PatientSearchRequest filter);
     }
 }

@@ -1,6 +1,8 @@
+using dto;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.IdentityModel.Tokens;
 using Models;
 
 namespace Repository
@@ -23,9 +25,28 @@ namespace Repository
             return await _context.Patient.FindAsync(id);
         }
 
-        public async Task<Patient?> GetpatientByNameAsync(string name)
+        public async Task<IEnumerable<Patient?>> GetPatientFilterAsync(PatientSearchRequest filter)
         {
-            return await _context.Patient.FindAsync(name);
+            var query = _context.Patient.AsQueryable();
+
+            if (filter == null)
+            {
+                return await query.ToListAsync();
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.PNAME))
+            {
+                query = query.Where(p => p.PNAME.Contains(filter.PNAME));
+            }
+            if (filter.PDOB.HasValue)
+            {
+                query = query.Where(p => p.PDOB == filter.PDOB.Value);
+            }
+            if (!string.IsNullOrWhiteSpace(filter.PRN))
+            {
+                query = query.Where(p => p.PRN.Contains(filter.PRN));
+            }
+            return await query.ToListAsync();
         }
     }
 }

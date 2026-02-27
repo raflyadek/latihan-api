@@ -1,3 +1,4 @@
+using dto;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -13,25 +14,26 @@ namespace Controller
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var patient = await _service.GetAllAsync();
-            return Ok(patient);
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> GetAll()
+        // {
+        //     var patient = await _service.GetAllAsync();
+        //     return Ok(patient);
+        // }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromQuery]long id)
+        [HttpGet("{id:long}")]
+        public async Task<IActionResult> GetById([FromRoute]long id)
         {
             Console.WriteLine($"id: {id}");
             var patient = await _service.GetByIdAsync(id);
             return Ok(new { data = patient });
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetByName(string name)
+        [HttpGet]
+        public async Task<IActionResult> GetByFilter(
+            [FromQuery] PatientSearchRequest filter)
         {
-            var patient = await _service.GetByNameAsync(name);
+            var patient = await _service.GetPatientByFilterAsync(filter);
             return Ok(new { data = patient});
         }
     }

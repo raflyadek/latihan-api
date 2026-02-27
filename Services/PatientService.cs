@@ -1,3 +1,4 @@
+using dto;
 using Models;
 using Repository;
 
@@ -21,9 +22,9 @@ namespace Services
             return await _repo.GetPatientByIdAsync(id);
         }
 
-        public async Task<Patient?> GetByNameAsync(string name)
+        public async Task<IEnumerable<Patient?>> GetPatientByFilterAsync(PatientSearchRequest filter)
         {
-            return await _repo.GetpatientByNameAsync(name);
+            return await _repo.GetPatientFilterAsync(filter);
         }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("latihan-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98f9ef70573626eb55a784e5bfec0a82538e4a20")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f049aab8aaa7d1119c43926df8a767b7ead4db8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("latihan-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("latihan-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
