@@ -22,5 +22,10 @@ namespace Repository
         {
             return await _context.Patient.FindAsync(id);
         }
+
+        public async Task<Patient?> GetpatientByNameAsync(string name)
+        {
+            return await _context.Patient.FindAsync(name);
+        }
     }
 }

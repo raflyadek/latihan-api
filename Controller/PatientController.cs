@@ -21,11 +21,18 @@ namespace Controller
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute]long id)
+        public async Task<IActionResult> GetById([FromQuery]long id)
         {
             Console.WriteLine($"id: {id}");
             var patient = await _service.GetByIdAsync(id);
             return Ok(new { data = patient });
+        }
+
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            var patient = await _service.GetByNameAsync(name);
+            return Ok(new { data = patient});
         }
     }
 }
